@@ -7,10 +7,9 @@ class Cliente():
         self.matrizA = Matrix(matrizA)
         self.matrizB = Matrix(matrizB)
 
-    # implementar o método de separar tasks
-    def separar_tasks(self):
+    def separar_tasks_enfileirar(self,fila):
         taskList = []
         for i in range(len(self.matrizA)):
             for j in range(len(self.matrizB[0])):
-                task = Job(self.matrizA.getRow(i), self.matrizB.getColumn(j))
-                taskList.append(task)
+                task = Job(self.matrizA.getRow(i), self.matrizB.getColumn(j), i, j)
+                fila.put(task)
