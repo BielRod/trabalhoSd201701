@@ -1,6 +1,6 @@
 from threading import Thread
 
-class worker(Thread):
+class Worker(Thread):
     def __init__(self, num, filaOrigem, filaDestino):
         Thread.__init__(self)
         self.num = num

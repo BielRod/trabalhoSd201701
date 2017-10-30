@@ -1,4 +1,5 @@
 from . import Cliente
+from . import Worker
 import random
 import Queue
 
@@ -20,3 +21,6 @@ def main():
 
     cliente.separar_tasks_enfileirar(fila_tarefas)
     
+    for i in range(NUMERO_DE_WORKERS - 1):
+        t = Worker(i, fila_tarefas, fila_resultados)
+        t.start()
