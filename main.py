@@ -2,13 +2,14 @@ from cliente import *
 from worker import *
 import random
 import Queue
+from datetime import datetime
 
 fila_tarefas = Queue.Queue()
 fila_resultados = Queue.Queue()
 
 NUMERO_DE_LINHAS = 5
 NUMERO_DE_COLUNAS = 5
-NUMERO_DE_WORKERS = 3
+NUMERO_DE_WORKERS = 2
 
 
 def print_matriz(matriz):
@@ -43,4 +44,6 @@ def main():
     cliente.join()
     print_matriz(cliente.final_matrix)
 
+start_time = datetime.now()
 main()
+print 'tempo de execucao: {}'.format(datetime.now() - start_time)
