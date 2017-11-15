@@ -1,14 +1,16 @@
 from cliente import *
 from worker import *
+from bag import *
 import random
 import Queue
 from datetime import datetime
 
 fila_tarefas = Queue.Queue()
 fila_resultados = Queue.Queue()
+bag_of_tasks = Bag(fila_tarefas, fila_resultados)
 
-NUMERO_DE_LINHAS = 5
-NUMERO_DE_COLUNAS = 5
+NUMERO_DE_LINHAS = 3
+NUMERO_DE_COLUNAS = 3
 NUMERO_DE_WORKERS = 2
 
 
@@ -32,13 +34,13 @@ def main():
     print('\n##### MATRIZ B #####\n')
     print_matriz(matrizB)
 
-    cliente = Cliente(matrizA, matrizB, fila_resultados)
+    cliente = Cliente(matrizA, matrizB, bag_of_tasks)
 
-    cliente.separar_tasks_enfileirar(fila_tarefas)
+    cliente.separar_tasks_enfileirar()
     cliente.start()
 
     for i in range(NUMERO_DE_WORKERS):
-        t = Worker(i, fila_tarefas, fila_resultados)
+        t = Worker(i, bag_of_tasks)
         t.start()
 
     cliente.join()
