@@ -1,22 +1,24 @@
 from job import *
 from matrix import *
 from threading import Thread
+import pickle
 
 
 class Cliente(Thread):
-    def __init__(self, matriz_A, matriz_B, bag):
+    def __init__(self, matriz_A, matriz_B, bag_server):
         Thread.__init__(self)
         self.matriz_A = Matrix(matriz_A)
         self.matriz_B = Matrix(matriz_B)
-        self.bag = bag
+        self.bag = bag_server
         self.final_matrix = None
 
     def separar_tasks_enfileirar(self):
-        taskList = []
         for i in range(len(self.matriz_A.matriz)):
             for j in range(len(self.matriz_B.matriz[0])):
                 task = Job(self.matriz_A.getRow(i), self.matriz_B.getColumn(j), i, j)
-                self.bag.insert_task(task)
+                print('tipo da task: {}'.format(type(task)))
+                self.bag.insert_task(pickle.dumps(task))
+        self.bag.start_calculate()
 
     def montar_matriz_resultante(self):
         i = 0
@@ -27,7 +29,7 @@ class Cliente(Thread):
         matriz_final = [[None for x in range(n_row)] for y in range(n_col)]
 
         while i < quantidade_de_elementos_matriz_resultante:
-            resultado = self.bag.get_resultado()
+            resultado = pickle.loads(self.bag.get_resultado())
             matriz_final[resultado.idxLinha][resultado.idxColuna] = resultado.soma
             i = i + 1
 

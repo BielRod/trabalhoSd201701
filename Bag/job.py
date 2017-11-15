@@ -8,7 +8,7 @@ class Job():
         self.coluna = coluna  # coluna propriamente dita
         self.idxLinha = idxLinha  # indice da linha
         self.idxColuna = idxColuna  # indice da coluna
-        self.soma = None
+        self.soma = False
 
     def calcula_produto(self):
         soma = 0
