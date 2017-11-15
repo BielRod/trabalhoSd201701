@@ -4,6 +4,7 @@ import pickle
 
 class Bag(Thread):
     def __init__(self, fila_tarefas, fila_resultados):
+        Thread.__init__(self)
         self.fila_tarefas = fila_tarefas
         self.fila_resultados = fila_resultados
 

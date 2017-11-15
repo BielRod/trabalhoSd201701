@@ -23,6 +23,7 @@ def start_calculate():
     for i in range(NUMERO_DE_WORKERS):
         t = Worker(i, bag_of_tasks)
         t.start()
+    bag_of_tasks.start()
 
 
 server.register_function(start_calculate)
