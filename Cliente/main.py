@@ -9,6 +9,7 @@ from datetime import datetime
 # bag_of_tasks = Bag(fila_tarefas, fila_resultados)
 
 bag_server = xmlrpclib.ServerProxy('http://localhost:8000',allow_none=True)
+bag_server.init_bag()
 NUMERO_DE_LINHAS = 3
 NUMERO_DE_COLUNAS = 3
 

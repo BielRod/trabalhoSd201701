@@ -13,9 +13,17 @@ server.register_introspection_functions()
 
 fila_tarefas = Queue.Queue()
 fila_resultados = Queue.Queue()
-bag_of_tasks = Bag(fila_tarefas, fila_resultados)
+bag_of_tasks = None
 
-server.register_instance(bag_of_tasks)
+
+def init_bag():
+    global bag_of_tasks 
+    bag_of_tasks = Bag(fila_tarefas, fila_resultados)
+    server.register_instance(bag_of_tasks)
+    return True
+
+
+server.register_function(init_bag)
 
 
 def start_calculate():
