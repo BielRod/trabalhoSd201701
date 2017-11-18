@@ -16,7 +16,7 @@ class Cliente(Thread):
         for i in range(len(self.matriz_A.matriz)):
             for j in range(len(self.matriz_B.matriz[0])):
                 task = Job(self.matriz_A.getRow(i), self.matriz_B.getColumn(j), i, j)
-                print('tipo da task: {}'.format(type(task)))
+                # print('tipo da task: {}'.format(type(task)))
                 self.bag.insert_task(pickle.dumps(task))
         self.bag.start_calculate()
 

@@ -10,8 +10,8 @@ from datetime import datetime
 
 bag_server = xmlrpclib.ServerProxy('http://localhost:8000',allow_none=True)
 bag_server.init_bag()
-NUMERO_DE_LINHAS = 3
-NUMERO_DE_COLUNAS = 3
+NUMERO_DE_LINHAS = 50
+NUMERO_DE_COLUNAS = 50
 
 
 
@@ -31,9 +31,9 @@ def main():
     matrizB = gera_matriz_mock()
 
     print('##### MATRIZ A #####\n')
-    print_matriz(matrizA)
+    #print_matriz(matrizA)
     print('\n##### MATRIZ B #####\n')
-    print_matriz(matrizB)
+    #print_matriz(matrizB)
 
     cliente = Cliente(matrizA, matrizB, bag_server)
 
@@ -45,7 +45,8 @@ def main():
 #        t.start()
 
     cliente.join()
-    print_matriz(cliente.final_matrix)
+    print('\n#### MATRIZ FINAL ####\n')
+    #print_matriz(cliente.final_matrix)
 
 start_time = datetime.now()
 main()

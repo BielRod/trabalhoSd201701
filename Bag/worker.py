@@ -8,10 +8,13 @@ class Worker(Thread):
         self.bag = bag
 
     def doJob(self):
-        job = self.bag.get_tarefa()
-        print('woker {} calculando produto'.format(self.num))
-        job.calcula_produto()
-        self.bag.insert_result(job)
+        try:
+            job = self.bag.get_tarefa()
+            # print('woker {} calculando produto'.format(self.num))
+            job.calcula_produto()
+            self.bag.insert_result(job)
+        except:
+            bag.insert_task(job)
 
     def run(self):
         while not self.bag.is_fila_tarefas_empty():
