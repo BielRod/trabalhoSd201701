@@ -10,16 +10,16 @@ from datetime import datetime
 
 bag_server = xmlrpclib.ServerProxy('http://localhost:8000',allow_none=True)
 bag_server.init_bag()
-NUMERO_DE_LINHAS = 50
-NUMERO_DE_COLUNAS = 50
+NUMERO_DE_LINHAS = 10
+NUMERO_DE_COLUNAS = 10
 
 
 
-def print_matriz(matriz):
+def print_matriz(matriz,output):
     for i in range(len(matriz)):
         for j in range(len(matriz[0])):
-            print ('{} '.format(matriz[i][j])),
-        print('\n')
+            output.write('{} '.format(matriz[i][j])),
+        output.write('\n')
 
 
 def gera_matriz_mock():
@@ -27,13 +27,14 @@ def gera_matriz_mock():
 
 
 def main():
+    log = open('exec_log.txt','w')
     matrizA = gera_matriz_mock()
     matrizB = gera_matriz_mock()
 
-    print('##### MATRIZ A #####\n')
-    #print_matriz(matrizA)
-    print('\n##### MATRIZ B #####\n')
-    #print_matriz(matrizB)
+    log.write('##### MATRIZ A #####\n')
+    print_matriz(matrizA,log)
+    log.write('\n##### MATRIZ B #####\n')
+    print_matriz(matrizB,log)
 
     cliente = Cliente(matrizA, matrizB, bag_server)
 
@@ -45,8 +46,8 @@ def main():
 #        t.start()
 
     cliente.join()
-    print('\n#### MATRIZ FINAL ####\n')
-    #print_matriz(cliente.final_matrix)
+    log.write('\n#### MATRIZ FINAL ####\n')
+    print_matriz(cliente.final_matrix,log)
 
 start_time = datetime.now()
 main()
