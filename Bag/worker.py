@@ -14,7 +14,7 @@ class Worker(Thread):
             job.calcula_produto()
             self.bag.insert_result(job)
         except:
-            bag.insert_task(job)
+            self.bag.insert_task(job)
 
     def run(self):
         while not self.bag.is_fila_tarefas_empty():
