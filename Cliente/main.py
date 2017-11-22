@@ -10,8 +10,7 @@ from datetime import datetime
 
 bag_server = xmlrpclib.ServerProxy('http://localhost:8000',allow_none=True)
 bag_server.init_bag()
-NUMERO_DE_LINHAS = 10
-NUMERO_DE_COLUNAS = 10
+DIMENSAO = 15
 
 
 
@@ -23,7 +22,7 @@ def print_matriz(matriz,output):
 
 
 def gera_matriz_mock():
-    return [[random.randint(1,9) for x in range(NUMERO_DE_LINHAS)] for y in range(NUMERO_DE_COLUNAS)]
+    return [[random.randint(1,9) for x in range(DIMENSAO)] for y in range(DIMENSAO)]
 
 
 def main():
